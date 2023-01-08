@@ -24,8 +24,10 @@ class CalenderController extends Controller
            case 'create':
               $event = Events::create([
                   'event_name' => $request->event_name,
+                  'event_description' => $request->event_description,
                   'event_start' => $request->event_start,
                   'event_end' => $request->event_end,
+
               ]);
 
               return response()->json($event);

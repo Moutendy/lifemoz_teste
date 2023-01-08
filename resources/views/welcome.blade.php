@@ -48,6 +48,7 @@
                 selectHelper: true,
                 select: function (event_start, event_end, allDay) {
                     var event_name = prompt('Event Name:');
+                    var event_desc = prompt('Event Description');
                     if (event_name) {
                         var event_start = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
                         var event_end = $.fullCalendar.formatDate(event_end, "Y-MM-DD HH:mm:ss");
@@ -57,6 +58,7 @@
                                 event_name: event_name,
                                 event_start: event_start,
                                 event_end: event_end,
+                                event_description: event_desc,
                                 type: 'create'
                             },
                             type: "POST",
