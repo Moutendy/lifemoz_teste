@@ -58,7 +58,7 @@ class RegisteredUserController extends Controller
 
     public function sendemail($email)
     {
-        Mail::to($email)->send(new Registermail($email));
+        Mail::to($email)->send(new Registermail());
         // return view('pages.home');
 
     }

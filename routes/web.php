@@ -32,5 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/calendar-crud-ajax', [CalenderController::class, 'calendarEvents'])->name('calendarEvents');
 
     Route::get('logout', [CalenderController::class, 'logout'])->name('logout');
+    Route::get('bord', [CalenderController::class, 'bord'])->name('bord');
+    Route::get('tablebord', [CalenderController::class, 'tablebord'])->name('tablebord');
+
 });
 

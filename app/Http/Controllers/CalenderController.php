@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Events;
+use Illuminate\Support\Facades\DB;
 class CalenderController extends Controller
 {
 
@@ -11,13 +12,13 @@ class CalenderController extends Controller
     //ensemble des evenement
     public function index(Request $request)
     {
-        if($request->ajax()) {
-            $data = Events::whereDate('event_start', '>=', $request->start)
-                ->whereDate('event_end',   '<=', $request->end)
-                ->get(['id', 'event_name', 'event_start', 'event_end']);
+
+            $data =  DB::table('events')
+            ->where('user', '=',auth()->user()->id)
+            ->get();
             return response()->json($data);
-        }
-        return view('welcome');
+
+
     }
 
     public function calendarEvents(Request $request)
@@ -69,5 +70,17 @@ class CalenderController extends Controller
     public function loginform(Request $request)
     {
         return view('connexion.login');
+    }
+
+    public function bord()
+    {
+        return ;
+
+    }
+
+    public function tablebord()
+    {
+       $tablebord= DB::select('SELECT * FROM `users` u, events e WHERE e.user=u.id');
+        return view('tableborde',compact('tablebord'));
     }
 }
