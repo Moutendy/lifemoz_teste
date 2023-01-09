@@ -7,10 +7,7 @@ use App\Models\Events;
 class CalenderController extends Controller
 {
 
-    public function home()
-    {
-        return view('welcome');
-    }
+
     //ensemble des evenement
     public function index(Request $request)
     {
@@ -25,52 +22,52 @@ class CalenderController extends Controller
 
     public function calendarEvents(Request $request)
     {
-        // switch ($request->type) {
-        //    case 'create':
-        //       $event = Events::create([
-        //           'event_name' => $request->event_name,
-        //           'event_description' => $request->event_description,
-        //           'event_start' => $request->event_start,
-        //           'event_end' => $request->event_end,
-        //           'user'=>1
-
-        //       ]);
-
-        //       return response()->json($event);
-        //       break;
-
-        //    case 'edit':
-        //       $event = Events::find($request->id)->update([
-        //           'event_name' => $request->event_name,
-        //           'event_start' => $request->event_start,
-        //           'event_end' => $request->event_end,
-        //       ]);
-
-        //       return response()->json($event);
-        //       break;
-
-        //    case 'delete':
-        //       $event = Events::find($request->id)->delete();
-
-        //       return response()->json($event);
-        //      break;
-
-        //    default:
-        //      # ...
-        //      break;
-        // }
         switch ($request->type) {
-            case 'create':
-       $event = Events::create([
+           case 'create':
+              $event = Events::create([
                   'event_name' => $request->event_name,
                   'event_description' => $request->event_description,
                   'event_start' => $request->event_start,
                   'event_end' => $request->event_end,
-                  'user'=>2
+                  'user'=>auth()->user()->id,
+
               ]);
-            return response()->json($event);
-               break;
+
+              return response()->json($event);
+              break;
+
+           case 'edit':
+              $event = Events::find($request->id)->update([
+                  'event_name' => $request->event_name,
+                  'event_start' => $request->event_start,
+                  'event_end' => $request->event_end,
+              ]);
+
+              return response()->json($event);
+              break;
+
+           case 'delete':
+              $event = Events::find($request->id)->delete();
+
+              return response()->json($event);
+             break;
+
+           default:
+             # ...
+             break;
         }
 
+
+    }
+
+    public function logout(Request $request){
+        auth()->user()->tokens()->delete();
+
+     return redirect('/');
+    }
+
+    public function loginform(Request $request)
+    {
+        return view('connexion.login');
     }
 }

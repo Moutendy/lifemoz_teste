@@ -91,9 +91,9 @@
                   <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                 </div>
                 <p class="mt-4 text-sm text-center">
-                <a href="/loginform">
-                    vous avez deja un compte
-                </a>
+                    <a href="{{ route('login') }}">
+                        vous n'avez pas de compte
+                    </a>
                 </p>
               </form>
             </div>

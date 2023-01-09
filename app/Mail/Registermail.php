@@ -10,17 +10,17 @@ use Illuminate\Queue\SerializesModels;
 class Registermail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $user;
+    
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($users)
+    public function __construct()
     {
         //
-        $this->user=$users;
+
 
     }
 

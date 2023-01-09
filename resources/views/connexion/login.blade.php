@@ -85,7 +85,7 @@
                   <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
                 </div>
                 <p class="mt-4 text-sm text-center">
-                <a href="/registerform">
+                <a href="{{ route('register') }}">
                     vous n'avez pas de compte
                 </a>
                 </p>

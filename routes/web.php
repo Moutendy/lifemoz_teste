@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CalenderController;
-use App\Http\Controllers\Auth\Authentification;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,26 +17,20 @@ use App\Http\Controllers\Auth\Authentification;
 //     return view('welcome');
 // });
 
-Route::get('registerform', [Authentification::class, 'registerform'])->name('registerform');
+Route::get('/dashboard', function () {
+    return view('welcome');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/login', [Authentification::class, 'loginform'])->name('loginform');
+require __DIR__.'/auth.php';
 
-
-
-Route::post('login', [Authentification::class, 'login'])->name('login');
-Route::post('register', [Authentification::class, 'register'])->name('register');
-
-
-
-
-
-Route::get('/home', [CalenderController::class, 'home'])->middleware(['auth'])->name('home');
-Route::get('/calendar-event', [CalenderController::class, 'index'])->middleware(['auth'])->name('index');
-Route::post('/calendar-crud-ajax', [CalenderController::class, 'calendarEvents'])->middleware(['auth'])->name('calendarEvents');
+Route::get('/', [CalenderController::class, 'loginform'])->name('loginform');
 
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/calendar-event', [CalenderController::class, 'index'])->name('index');
 
-    Route::get('logout', [Authentification::class, 'logout']);
+    Route::post('/calendar-crud-ajax', [CalenderController::class, 'calendarEvents'])->name('calendarEvents');
+
+    Route::get('logout', [CalenderController::class, 'logout'])->name('logout');
 });
 
