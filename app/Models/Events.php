@@ -12,6 +12,7 @@ class Events extends Model
         'event_name',
         'event_description',
         'event_start',
-        'event_end'
+        'event_end',
+        'user'
     ];
 }
