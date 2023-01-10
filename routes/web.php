@@ -35,5 +35,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('bord', [CalenderController::class, 'bord'])->name('bord');
     Route::get('tablebord', [CalenderController::class, 'tablebord'])->name('tablebord');
 
+     Route::get('updateprofil/{id}', [CalenderController::class, 'updateprofil'])->name('updateprofil');
+     Route::post('/updateprofiluser', [CalenderController::class, 'updateprofiluser']);
+
+     Route::get('/delete/{id}', [CalenderController::class, 'delete']);
+
 });
 

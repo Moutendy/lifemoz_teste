@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Events;
+use App\Models\{Events,User};
 use Illuminate\Support\Facades\DB;
 class CalenderController extends Controller
 {
@@ -48,9 +48,9 @@ class CalenderController extends Controller
               break;
 
            case 'delete':
-              $event = Events::find($request->id)->delete();
+            //   $event = Events::find($request->id)->delete();
 
-              return response()->json($event);
+              return $this->delete($request->id);
              break;
 
            default:
@@ -72,9 +72,10 @@ class CalenderController extends Controller
         return view('connexion.login');
     }
 
-    public function bord()
+    public function updateprofil($id)
     {
-        return ;
+        $user= DB::select('SELECT * FROM `users` u WHERE u.id=:id',['id'=>$id]);
+        return view('updateprofil',compact('user'));
 
     }
 
@@ -82,5 +83,25 @@ class CalenderController extends Controller
     {
        $tablebord= DB::select('SELECT * FROM `users` u, events e WHERE e.user=u.id');
         return view('tableborde',compact('tablebord'));
+    }
+
+    public function tablebordbyuser($id)
+    {
+       $tablebord= DB::select('SELECT * FROM events e WHERE e.user=:id',['id'=>$id]);
+        return $tablebord;
+    }
+
+    public function updateprofiluser(Request $request)
+    {
+        User::find(4)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+    }
+
+    public function delete($id)
+    {
+    $event=DB::select('DELETE FROM events WHERE id=:id',['id'=>$id]);
+       return response()->json($event);
     }
 }

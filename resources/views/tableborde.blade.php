@@ -32,6 +32,9 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../assets/css/material-kit.css?v=3.0.4" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
 </head>
 
 <body class="sign-in-basic">
@@ -39,6 +42,11 @@
         <a href="{{ route('dashboard') }}" class="btn bg-gradient-success btn-block mb-3">table de bord</a>
     </p>
     <div class="container mt-5" style="max-width: 1000px">
+        <div class="loader" style="max-width: 300px">
+            <div id='full_calendar_events'>
+            </div>
+
+          </div>
 <div class="card">
     <div class="table-responsive">
       <table class="table align-items-center mb-0">
@@ -76,7 +84,7 @@
               <span class="text-secondary text-xs font-weight-normal">{{ $bord->event_end }}</span>
             </td>
             <td class="align-middle">
-                <button type="button" class="btn bg-gradient-success btn-block mb-3">
+                <button type="button" class="btn bg-gradient-success btn-block mb-3" onclick="calendrier({{ $bord->user  }})">
                    Calendrier
                   </button>
             </td>
@@ -86,10 +94,18 @@
           @endforeach
         </tbody>
       </table>
+
+
     </div>
   </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="./../js/tablebord.js"></script>
+
 </body>
 
 </html>

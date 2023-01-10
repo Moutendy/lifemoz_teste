@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/bord', [CalenderController::class, 'bord'])->name('bord');
+Route::get('/tablebordbyuser/{id}', [CalenderController::class, 'tablebordbyuser'])->name('tablebordbyuser');
+Route::post('/updateprofiluser', [CalenderController::class, 'updateprofiluser']);
+Route::post('/delete/{id}', [CalenderController::class, 'delete']);

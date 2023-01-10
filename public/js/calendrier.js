@@ -51,6 +51,7 @@ $(document).ready(function() {
                             allDay: allDay
                         }, true);
                         calendar.fullCalendar('unselect');
+                        location.reload();
                     }
                 });
             }
@@ -75,21 +76,9 @@ $(document).ready(function() {
             });
         },
         eventClick: function(event) {
-            var eventDelete = confirm("Etes vous sur?");
-            if (eventDelete) {
-                $.ajax({
-                    type: "POST",
-                    url: '/calendar-crud-ajax',
-                    data: {
-                        id: event.id,
-                        type: 'delete'
-                    },
-                    success: function(response) {
-                        calendar.fullCalendar('removeEvents', event.id);
-                        displayMessage("Event removed");
-                    }
-                });
-            }
+
+           console.log(event.id);
+           deleteevent(event.id);
         }
     });
     var xhttp = new XMLHttpRequest();
@@ -107,10 +96,11 @@ $(document).ready(function() {
                     title: res.event_name,
                     start: res.event_start,
                     end: res.event_end,
+                    id:res.id
 
                 }, true);
             }
-            console.log('ddd')
+
 
 
         } else {
@@ -127,5 +117,31 @@ $(document).ready(function() {
 });
 
 function displayMessage(message) {
-    toastr.success(message, 'Event');
+    Swal.fire(
+        message,
+        'success'
+      )
+;
+}
+
+function deleteevent(id)
+{
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "/delete/"+id);
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            // Response
+            displayMessage("evenement supprimer");
+            location.reload();
+
+
+        } else {
+
+        }
+
+    }
+    xhttp.send();
+
 }

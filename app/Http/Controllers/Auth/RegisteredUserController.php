@@ -49,7 +49,7 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $this->sendemail($request->email);
+        // $this->sendemail($request->email);
 
         Auth::login($user);
 
