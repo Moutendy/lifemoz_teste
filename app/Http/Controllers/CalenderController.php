@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\{Events,User};
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class CalenderController extends Controller
 {
 
@@ -62,7 +63,11 @@ class CalenderController extends Controller
     }
 
     public function logout(Request $request){
-        auth()->user()->tokens()->delete();
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
      return redirect('/');
     }
